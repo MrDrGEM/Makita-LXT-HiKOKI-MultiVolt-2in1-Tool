@@ -2,6 +2,9 @@
 
 Автономный портативный тестер и разблокировщик аккумуляторов **Makita LXT (14.4V / 18V / 36V)** и **HiKOKI / Metabo HPT MultiVolt (18V / 36V)** на базе платы **Guition JC4827W543** (ESP32-S3 с 4.3" емкостным сенсорным IPS-дисплеем 480×272).
 
+<img width="800" height="911" alt="image" src="https://github.com/user-attachments/assets/5f5b5a2b-0f27-45ec-89f6-7569a237c096" />
+
+
 <img width="800" height="901" alt="image" src="https://github.com/user-attachments/assets/037ef000-3d38-4f78-b41b-92cec3d5d204" />
 
 
