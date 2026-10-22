@@ -30,11 +30,11 @@
   * Шаг 2: автоматическое восстановление поврежденного фрейма (обнуление Nybble 34, пересчет CS0 и CS2 с сохранением исходных счетчиков и истории).
 * **Omega Lock**: сервисный режим принудительной программной блокировки/разблокировки фрейма.
 
-* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-35.jpg
-* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-37.jpg
-* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-40.jpg
-* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-43.jpg
-* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-46.jpg
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/e4c8f551-895b-42a5-b133-c2fa8471f5af" />
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/970fdc60-af2f-4c4a-a9d2-f398e93ba74c" />
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/37c7a2e1-d58a-435e-a740-4c7e00a93671" />
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/23e9fbac-8826-43d0-b513-afa62d6b07ae" />
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/c566c163-b6b3-4b9f-b018-9e99c1da53a9" />
 
 ### 2. HiKOKI MultiVolt (BSL36A18, BSL36B18, BSL18xx и др.)
 * **Напряжения по банкам и ячейкам**: общее напряжение Lower Bank и Upper Bank, напряжение каждой ячейки (L1–L5), разбаланс по банкам.
@@ -87,6 +87,9 @@
 | **Плюс (+)** *(Опция)* | **IN+ DC-DC** | На вход Step-Down (18-36V $\to$ 5V) | Для автономного питания от батареи |
 
 > 💡 **Совет по HiKOKI:** Если контроллер батареи спит и не отвечает, нажмите кнопку индикатора уровня заряда на корпусе аккумулятора — это разбудит BMS.
+>
+> Подтяжку от 3,3в я сделал следующим образом
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/aeb5b4d7-2179-4900-a11c-eac09574eed2" />
 
 ---
 
