@@ -30,6 +30,12 @@
   * Шаг 2: автоматическое восстановление поврежденного фрейма (обнуление Nybble 34, пересчет CS0 и CS2 с сохранением исходных счетчиков и истории).
 * **Omega Lock**: сервисный режим принудительной программной блокировки/разблокировки фрейма.
 
+* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-35.jpg
+* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-37.jpg
+* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-40.jpg
+* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-43.jpg
+* https://github.com/MrDrGEM/Makita-LXT-HiKOKI-MultiVolt-2in1-Tool/blob/main/Pics/photo_2026-10-22_10-55-46.jpg
+
 ### 2. HiKOKI MultiVolt (BSL36A18, BSL36B18, BSL18xx и др.)
 * **Напряжения по банкам и ячейкам**: общее напряжение Lower Bank и Upper Bank, напряжение каждой ячейки (L1–L5), разбаланс по банкам.
 * **Температурные датчики**: раздельный мониторинг температур верхнего и нижнего банков ячеек (TLower, TUpper).
