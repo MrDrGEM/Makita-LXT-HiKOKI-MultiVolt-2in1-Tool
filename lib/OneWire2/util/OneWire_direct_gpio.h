@@ -156,16 +156,124 @@ bool directRead(IO_REG_TYPE mask)
 #define DIRECT_WRITE_HIGH(base, mask)   (mask > 0x8000) ? GP16O |= 1 : (GPOS = (mask))
 
 #elif defined(ARDUINO_ARCH_ESP32)
+#include <driver/rtc_io.h>
+#include <soc/gpio_struct.h>
 #define PIN_TO_BASEREG(pin)             (0)
 #define PIN_TO_BITMASK(pin)             (pin)
 #define IO_REG_TYPE                     uint32_t
 #define IO_REG_BASE_ATTR
 #define IO_REG_MASK_ATTR
-#define DIRECT_READ(base, pin)          digitalRead(pin)
-#define DIRECT_WRITE_LOW(base, pin)     digitalWrite(pin, LOW)
-#define DIRECT_WRITE_HIGH(base, pin)    digitalWrite(pin, HIGH)
-#define DIRECT_MODE_INPUT(base, pin)    pinMode(pin, INPUT)
-#define DIRECT_MODE_OUTPUT(base, pin)   pinMode(pin, OUTPUT)
+
+#if defined(CONFIG_IDF_TARGET_ESP32S3)
+static inline __attribute__((always_inline))
+IO_REG_TYPE directRead(IO_REG_TYPE pin)
+{
+    if (pin < 32) return (GPIO.in >> pin) & 0x1;
+    else if (pin <= 48) return (GPIO.in1.val >> (pin - 32)) & 0x1;
+    return 0;
+}
+
+static inline __attribute__((always_inline))
+void directWriteLow(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1tc = ((uint32_t)1 << pin);
+    else if (pin <= 48) GPIO.out1_w1tc.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directWriteHigh(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1ts = ((uint32_t)1 << pin);
+    else if (pin <= 48) GPIO.out1_w1ts.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directModeInput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1tc = ((uint32_t)1 << pin);
+    else if (pin <= 48) GPIO.enable1_w1tc.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directModeOutput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1ts = ((uint32_t)1 << pin);
+    else if (pin <= 48) GPIO.enable1_w1ts.val = ((uint32_t)1 << (pin - 32));
+}
+#elif defined(CONFIG_IDF_TARGET_ESP32C3)
+static inline __attribute__((always_inline))
+IO_REG_TYPE directRead(IO_REG_TYPE pin)
+{
+    if (pin < 32) return (GPIO.in >> pin) & 0x1;
+    return 0;
+}
+
+static inline __attribute__((always_inline))
+void directWriteLow(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1tc = ((uint32_t)1 << pin);
+}
+
+static inline __attribute__((always_inline))
+void directWriteHigh(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1ts = ((uint32_t)1 << pin);
+}
+
+static inline __attribute__((always_inline))
+void directModeInput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1tc = ((uint32_t)1 << pin);
+}
+
+static inline __attribute__((always_inline))
+void directModeOutput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1ts = ((uint32_t)1 << pin);
+}
+#else // Standard ESP32
+static inline __attribute__((always_inline))
+IO_REG_TYPE directRead(IO_REG_TYPE pin)
+{
+    if (pin < 32) return (GPIO.in >> pin) & 0x1;
+    else if (pin < 46) return (GPIO.in1.val >> (pin - 32)) & 0x1;
+    return 0;
+}
+
+static inline __attribute__((always_inline))
+void directWriteLow(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1tc = ((uint32_t)1 << pin);
+    else if (pin < 46) GPIO.out1_w1tc.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directWriteHigh(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.out_w1ts = ((uint32_t)1 << pin);
+    else if (pin < 46) GPIO.out1_w1ts.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directModeInput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1tc = ((uint32_t)1 << pin);
+    else if (pin < 46) GPIO.enable1_w1tc.val = ((uint32_t)1 << (pin - 32));
+}
+
+static inline __attribute__((always_inline))
+void directModeOutput(IO_REG_TYPE pin)
+{
+    if (pin < 32) GPIO.enable_w1ts = ((uint32_t)1 << pin);
+    else if (pin < 46) GPIO.enable1_w1ts.val = ((uint32_t)1 << (pin - 32));
+}
+#endif
+
+#define DIRECT_READ(base, pin)          directRead(pin)
+#define DIRECT_WRITE_LOW(base, pin)     directWriteLow(pin)
+#define DIRECT_WRITE_HIGH(base, pin)    directWriteHigh(pin)
+#define DIRECT_MODE_INPUT(base, pin)    directModeInput(pin)
+#define DIRECT_MODE_OUTPUT(base, pin)   directModeOutput(pin)
 
 #ifdef interrupts
 #undef interrupts
